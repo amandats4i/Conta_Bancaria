@@ -4,7 +4,7 @@ import conta_bancaria.util.Cores;
 
 public class Conta {
 
-	// DEFINIR ATRIBUTOS DA CLASSE
+	// DEFINIR "ATRIBUTOS" DA CLASSE
 	// É PRIVATE PARA SER ATLERADO APENAS POR CLASSE QUE RECEBEM "PERMISSÃO" DE
 	// ALTERAR ESSES DADOS
 
@@ -14,19 +14,22 @@ public class Conta {
 	private String titular;
 	private float saldo;
 
-	// O METODO CONSTRUTOR SEMPRE DEVE SER PUBLICO PARA QUE OUTRAS CLASSES O ACESSE.
+	// O "METODO CONSTRUTOR" SEMPRE DEVE SER PUBLICO PARA QUE OUTRAS CLASSES O
+	// ACESSE.
 	// PARA GERÁ-LO, CLIQUE NO PRIMEIRO
 	// "SOURCE", DEPOIS EM GENERATE CONSTRUCTOR USING FIELDS, MARCANDO A OPÇÃO DE
 	// OMIT SUPER()
 	public Conta(int numero, int agencia, int tipo, String titular, float saldo) {
-		//o THIS está interagindo com o atributo
+		// o THIS está interagindo com o atributo
 		this.numero = numero;
 		this.agencia = agencia;
 		this.tipo = tipo;
 		this.titular = titular;
 		this.saldo = saldo;
 	}
-	//METODO GET SET, sempre comecará em minusculo.
+
+	// METODO GET SET, sempre comecará em minusculo. MANTEM O CONCEITO DO
+	// ENCAPSULAMENTO E MANTEM AS INFOS SEGURAS.
 	public int getNumero() {
 		return numero;
 	}
@@ -66,32 +69,32 @@ public class Conta {
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
-	
-	public boolean sacar (float valor) {
-		if (this.getSaldo () < valor) {
+
+	// ABAIXO, TEMOS TRES "MÉTODOS AUXILIAR": VISUALIZADOR QUE VAI LISTAR OS
+	// OBJETOS, SACAR E DEPOSITAR
+
+	public boolean sacar(float valor) {
+		if (this.getSaldo() < valor) {
 			System.out.println(Cores.TEXT_YELLOW_BOLD + "SALDO INSUFICIENTE." + Cores.TEXT_RESET);
-			return false; //ESSE RETURN VALIDA A AÇÃO COMO FALSA
+			return false; // ESSE RETURN VALIDA A AÇÃO COMO FALSA
 		}
-		
+
 		this.setSaldo(this.getSaldo() - valor);
 		return true;
 	}
-	
-	public void depositar (float valor) {
-		this.setSaldo(this.getSaldo()+ valor);
+
+	public void depositar(float valor) {
+		this.setSaldo(this.getSaldo() + valor);
 	}
-	
-	//MÉTODO AUXILIAR VISUALISADOR VAI LISTAR OS OBJETOS
-	
-	public void visualizar () {
+
+	public void visualizar() {
 		String tipo = "";
-		
+
 		switch (this.tipo) {
-			case 1 -> tipo = "Conta Corrente";
-			case 2 -> tipo = "Conta Poupança";
+		case 1 -> tipo = "Conta Corrente";
+		case 2 -> tipo = "Conta Poupança";
 		}
-		
-		
+
 		System.out.println("\n\n*************************************");
 		System.out.println("Dados da Conta:");
 		System.out.println("*************************************");
@@ -101,6 +104,5 @@ public class Conta {
 		System.out.println("Titular da Conta: " + this.titular);
 		System.out.println("Saldo da Conta: " + this.saldo);
 	}
-	
-	
+
 }
