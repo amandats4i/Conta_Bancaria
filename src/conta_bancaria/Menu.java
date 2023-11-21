@@ -2,7 +2,10 @@ package conta_bancaria;
 
 import java.util.Scanner;
 
+
 import conta_bancaria.model.Conta;
+import conta_bancaria.model.ContaCorrente;
+import conta_bancaria.model.ContaPoupanca;
 import conta_bancaria.util.Cores;
 
 public class Menu {
@@ -12,7 +15,8 @@ public class Menu {
 	public static String theme2 = Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_GREEN_BOLD;
 	public static void main(String[] args) {
 
-		int opcao;
+		int opcao; 
+		float saque;
 		String nome;
 
 		/* Criar Objetos da Classe Conta para testes */
@@ -26,6 +30,16 @@ public class Menu {
 		c1.sacar(210000.00f);
 		c1.visualizar();
 		
+		ContaCorrente cc1 = new ContaCorrente(3, 456, 1, "Felipe Silva", 100000.00f, 2000.00f);
+		cc1.visualizar();
+		cc1.sacar(99000.00f);
+		cc1.visualizar();
+		
+		ContaPoupanca cc2 = new ContaPoupanca (1, 234, 2, "Joanna Martins", 30000.00f, 15);
+		cc2.visualizar();
+		
+		ContaPoupanca cc3 = new ContaPoupanca (3, 552, 2, "Paula Fortini", 450000.00f, 20);
+		cc3.visualizar();
 
 		while (true) {
 
@@ -84,6 +98,8 @@ public class Menu {
 				break;
 			case 6:
 				System.out.println(Cores.TEXT_WHITE + "Saque\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser sacado: ");
+				saque = leia.nextFloat();
 
 				break;
 			case 7:
