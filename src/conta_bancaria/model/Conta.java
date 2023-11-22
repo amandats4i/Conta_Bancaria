@@ -2,7 +2,10 @@ package conta_bancaria.model;
 
 import conta_bancaria.util.Cores;
 
-public class Conta {
+public abstract class Conta {
+	
+	public static String theme = Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_PURPLE_BOLD;
+	public static String theme2 = Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_GREEN_BOLD;
 
 	// DEFINIR "ATRIBUTOS" DA CLASSE
 	// É PRIVATE PARA SER ATLERADO APENAS POR CLASSE QUE RECEBEM "PERMISSÃO" DE
@@ -95,10 +98,10 @@ public class Conta {
 		case 2 -> tipo = "Conta Poupança";
 		}
 
-		System.out.println("\n\n*************************************");
-		System.out.println("           Dados da Conta:               ");
-		System.out.println("*************************************");
-		System.out.println("Numero da Conta: " + this.numero);
+		System.out.println(theme2 + "\n\n*************************************");
+		System.out.println(theme + "           Dados da Conta:           ");
+		System.out.println(theme2 + "*************************************");
+		System.out.println(theme + "Numero da Conta: " + this.numero);
 		System.out.println("Agencia: " + this.agencia);
 		System.out.println("Tipo da Conta: " + tipo);
 		System.out.println("Titular da Conta: " + this.titular);

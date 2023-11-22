@@ -38,7 +38,8 @@ public class ContaCorrente extends Conta {
 	@Override // Esse OVERRIDE indica que o metodo abaixo esta sendo SOBRESCRITO de outra classe //
 	public void visualizar () {
 		super.visualizar();
-		System.out.println("Limite da Conta: " + this.limite);
+		System.out.println("Limite da Conta: " + this.limite + "\n");
+		
 	}
 	
 	
