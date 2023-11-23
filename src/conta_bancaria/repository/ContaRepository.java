@@ -4,7 +4,7 @@ import conta_bancaria.model.Conta;
 
 public interface ContaRepository {
 	
-	// CRIAR CRUD
+	// CRIAR MÉTODOS CRUD
 	
 	public void procurarPorNumero (int numero);
 	public void listarTodas();

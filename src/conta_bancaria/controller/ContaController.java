@@ -17,6 +17,11 @@ public class ContaController implements ContaRepository {
 	@Override
 	public void procurarPorNumero(int numero) {
 		
+		var conta = buscarNaCollection (numero);
+		if (conta != null)
+			conta.visualizar();
+		else 
+			System.err.println("A conta numero " + numero + " não foi encontrada.\n");
 		
 	}
 
@@ -44,6 +49,12 @@ public class ContaController implements ContaRepository {
 	@Override
 	public void deletar(int numero) {
 		
+		var conta = buscarNaCollection (numero);
+		if (conta != null)
+			if (listaContas.remove(conta) == true)
+				System.out.println("A conta numero: " + numero + " foi excluída com sucesso.\n");
+		else 
+			System.err.println("A conta numero " + numero + " não foi encontrada.\n");
 		
 	}
 
@@ -65,10 +76,20 @@ public class ContaController implements ContaRepository {
 		
 	}
 	
-	// MÉTODOS AUXILIARES
+	// MÉTODOS AUXILIAR QUE VAI GERAR NUMERO DA CONTA AUTOMATICAMENTE
 	
 	public int gerarNumero () {
 		return ++ numero;
+	}
+	
+	public Conta buscarNaCollection (int numero) {
+		
+		for (var conta : listaContas) {
+			if (conta.getNumero() == numero)
+				return conta;
+		}
+		
+		return null;
 	}
 
 }

@@ -1,5 +1,6 @@
 package conta_bancaria;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import conta_bancaria.controller.ContaController;
@@ -53,8 +54,8 @@ public class Menu {
 			opcao = leia.nextInt();
 
 			if (opcao == 9) {
-				System.out
-						.println(Cores.TEXT_WHITE_BOLD + "\nAtendimento encerrado. \nBanco Manila S.A - For Everone.");
+				System.out.println(Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_PURPLE_BOLD + "\nAtendimento encerrado. \nBanco Manila S.A - For Everone.");
+				sobre();
 				leia.close();
 				System.exit(0);
 			}
@@ -98,39 +99,74 @@ public class Menu {
 			case 2:
 				System.out.println(Cores.TEXT_WHITE + "Listar todas as Contas: ");
 				contas.listarTodas();
-
+				keyPress();
 				break;
+				
 			case 3:
 				System.out.println(Cores.TEXT_WHITE + "Consultar dados da Conta - por número\n\n");
 
+				System.out.println("Digite o numero da conta: ");
+				numero = leia.nextInt();
+				contas.procurarPorNumero(numero);
+				keyPress();
 				break;
+
 			case 4:
 				System.out.println(Cores.TEXT_WHITE + "Atualizar dados da Conta\n\n");
-
+				keyPress();
 				break;
+
 			case 5:
 				System.out.println(Cores.TEXT_WHITE + "Apagar a Conta\n\n");
-
+				
+				System.out.println("Digite o numero da conta: ");
+				numero = leia.nextInt();
+				contas.deletar(numero);
+				keyPress();
 				break;
+
 			case 6:
 				System.out.println(Cores.TEXT_WHITE + "Saque\n\n");
 				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser sacado: ");
-
+				keyPress();
 				break;
+
 			case 7:
 				System.out.println(Cores.TEXT_WHITE + "Depósito\n\n");
-
+				keyPress();
 				break;
+
 			case 8:
 				System.out.println(Cores.TEXT_WHITE + "Transferência entre Contas\n\n");
-
+				keyPress();
 				break;
+
 			default:
 				System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n" + Cores.TEXT_RESET);
+				keyPress();
 				break;
 			}
 
-		}
+		}	
 
+	}
+	
+	public static void sobre () {
+		System.out.println(theme + "**********************************");
+		System.out.println(theme2 + "Projeto desenvolvido por: Amanda Tsai");
+		System.out.println("Contato: amandatsai16@gmail.com");
+		System.out.println("https://github.com/amandats4i");
+		System.out.println(theme + "**********************************");
+	}
+	
+
+	public static void keyPress() {
+
+		try {
+			System.out.println("Pressione ENTER para continuar.");
+			System.in.read();
+		} catch (IOException e) {
+			System.out.println("Você pressionou uma tecla inválida.");
+		}
 	}
 }
