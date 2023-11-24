@@ -73,14 +73,19 @@ public class ContaController implements ContaRepository {
 
 		Optional<Conta> conta = buscarNaCollection(numero);
 
-		if (conta.isPresent())
+		if (conta.isPresent()) {
 			if (conta.get().sacar(valor) == true) {
 				System.out.println("O saque na conta: " + numero + " foi efetuado com sucesso.\n");
-				conta.get().getSaldo();
+				System.out.println("Seu saldo atual é: " + conta.get().getSaldo());
+				
 			} else
 				System.err.println("A conta numero " + numero + " não foi encontrada.\n");
 
+			
+		}
 	}
+		
+	
 
 	@Override
 	public void depositar(int numero, float valor) {
@@ -90,10 +95,10 @@ public class ContaController implements ContaRepository {
 		if (conta.isPresent()) {
 				conta.get().depositar(valor);
 				System.out.println("O depósito na conta: " + numero + " foi efetuado com sucesso.\n");
-				conta.get().getSaldo();
+				System.out.println("Seu saldo atual é: " + conta.get().getSaldo());
 		} else 
 				System.err.println("A conta numero " + numero + " não foi encontrada.\n");
-		 
+		conta.get().getSaldo();
 	}	
 
 	@Override
@@ -106,6 +111,7 @@ public class ContaController implements ContaRepository {
 			if (contaOrigem.get().sacar(valor) == true) {
 				contaDestino.get().depositar(valor);
 				System.out.println("A transferencia para a conta " + numeroDestino + " foi efetuada com sucesso.\n");
+				System.out.println("Seu saldo atual é: " + contaOrigem.get().getSaldo());
 			}
 			
 			} else

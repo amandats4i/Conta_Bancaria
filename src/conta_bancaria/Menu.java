@@ -1,6 +1,7 @@
 package conta_bancaria;
 
 import java.io.IOException;
+
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -65,9 +66,9 @@ public class Menu {
 			switch (opcao) {
 			case 1:
 
-				System.out.println(Cores.TEXT_WHITE + "Criar Conta\n\n");
+				System.out.println(theme2 + "Criar Conta\n\n");
 
-				System.out.println("Digite o número da agência: ");
+				System.out.println(theme + "Digite o número da agência: ");
 				agencia = leia.nextInt();
 
 				System.out.println("Digite seu nome completo: ");
@@ -101,13 +102,13 @@ public class Menu {
 				break;
 
 			case 2:
-				System.out.println(Cores.TEXT_WHITE + "Listar todas as Contas: ");
+				System.out.println(theme + "Listar todas as Contas: ");
 				contas.listarTodas();
 				keyPress();
 				break;
 				
 			case 3:
-				System.out.println(Cores.TEXT_WHITE + "Consultar dados da Conta - por número\n\n");
+				System.out.println(theme + "Consultar dados da Conta - por número\n\n");
 
 				System.out.println("Digite o numero da conta: ");
 				numero = leia.nextInt();
@@ -116,9 +117,9 @@ public class Menu {
 				break;
 
 			case 4:
-				System.out.println(Cores.TEXT_WHITE + "Atualizar dados da Conta\n\n");
+				System.out.println(theme2 + "Atualizar dados da Conta\n\n");
 				
-				System.out.println("Digite do numero da conta: ");
+				System.out.println(theme +"Digite do numero da conta: ");
 				numero = leia.nextInt();
 				
 				Optional <Conta> conta = contas.buscarNaCollection(numero); 
@@ -157,35 +158,36 @@ public class Menu {
 				break;
 
 			case 5:
-				System.out.println(Cores.TEXT_WHITE + "Apagar a Conta\n\n");
+				System.out.println(theme2 + "Apagar a Conta\n\n");
 				
-				System.out.println("Digite o numero da conta: ");
+				System.out.println(theme + "Digite o numero da conta: ");
 				numero = leia.nextInt();
 				contas.deletar(numero);
 				keyPress();
 				break;
 
 			case 6:
-				System.out.println(Cores.TEXT_WHITE + "Saque\n\n");
+				System.out.println(theme2 + "Saque\n\n");
 				
-				System.out.println("Digite o numero da conta: ");
+				System.out.println(theme + "Digite o numero da conta: ");
 				numero = leia.nextInt();
 				
-				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser sacado: ");
+				System.out.println("Digite o valor a ser sacado: ");
 				valor = leia.nextFloat();
 				
 				contas.sacar(numero, valor);
+				
 				
 				keyPress();
 				break;
 
 			case 7:
-				System.out.println(Cores.TEXT_WHITE + "Depósito\n\n");
+				System.out.println(theme2 + "Depósito\n\n");
 				
-				System.out.println("Digite o numero da conta: ");
+				System.out.println(theme + "Digite o numero da conta: ");
 				numero = leia.nextInt();
 				
-				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser depositado: ");
+				System.out.println("Digite o valor a ser depositado: ");
 				valor = leia.nextFloat();
 				
 				contas.depositar(numero, valor);
@@ -194,9 +196,9 @@ public class Menu {
 				break;
 
 			case 8:
-				System.out.println(Cores.TEXT_GREEN + "Transferência entre Contas\n\n");
+				System.out.println(theme2 + "Transferência entre Contas\n\n");
 				
-				System.out.println("Digite o numero da conta de origem: ");
+				System.out.println(theme + "Digite o numero da conta de origem: ");
 				numero = leia.nextInt();
 				
 				System.out.println("Digite o numero da conta de destino: ");
@@ -214,7 +216,7 @@ public class Menu {
 				break;
 
 			default:
-				System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n" + Cores.TEXT_RESET);
+				System.err.println("\nOpção Inválida!\n" + Cores.TEXT_RESET);
 				keyPress();
 				break;
 			}
@@ -235,7 +237,7 @@ public class Menu {
 	public static void keyPress() {
 
 		try {
-			System.out.println("Pressione ENTER para continuar.");
+			System.out.println(Cores.TEXT_BLUE_BOLD + "Pressione ENTER para continuar.");
 			System.in.read();
 		} catch (IOException e) {
 			System.out.println("Você pressionou uma tecla inválida.");
