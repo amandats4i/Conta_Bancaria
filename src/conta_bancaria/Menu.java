@@ -1,6 +1,7 @@
 package conta_bancaria;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Scanner;
 
 import conta_bancaria.controller.ContaController;
@@ -94,7 +95,9 @@ public class Menu {
 					aniversario = leia.nextInt();
 					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, nome, saldo, aniversario));
 				}
-				}
+				} 
+				keyPress();
+				break;
 
 			case 2:
 				System.out.println(Cores.TEXT_WHITE + "Listar todas as Contas: ");
@@ -113,6 +116,42 @@ public class Menu {
 
 			case 4:
 				System.out.println(Cores.TEXT_WHITE + "Atualizar dados da Conta\n\n");
+				
+				System.out.println("Digite do numero da conta: ");
+				numero = leia.nextInt();
+				
+				Optional <Conta> conta = contas.buscarNaCollection(numero); 
+				
+				if (conta.isPresent()) {
+					
+					System.out.println("Digite o numero da agencia: ");
+					agencia = leia.nextInt();
+					
+					System.out.println("Digite o nome do titular: ");
+					leia.skip("\\R");
+					nome = leia.nextLine();
+					
+					tipo = conta.get().getTipo();
+
+					System.out.println("Digite o saldo da conta: ");
+					saldo = leia.nextFloat();
+
+					switch (tipo) {
+					case 1 -> {
+						System.out.println("Digite o limite da conta: ");
+						limite = leia.nextFloat();
+						contas.atualizar(new ContaCorrente(numero, agencia, tipo, nome, saldo, limite));
+					}
+					case 2 -> {
+						System.out.println("Digite o dia do aniversário da conta: ");
+						aniversario = leia.nextInt();
+						contas.atualizar(new ContaPoupanca(numero, agencia, tipo, nome, saldo, aniversario));
+					}
+					}
+					
+				} else
+					System.err.println("A conta numero: " + numero + " nao foi encontrada.");
+				
 				keyPress();
 				break;
 
