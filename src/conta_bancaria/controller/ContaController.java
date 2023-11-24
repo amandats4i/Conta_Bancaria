@@ -47,11 +47,11 @@ public class ContaController implements ContaRepository {
 
 		Optional<Conta> buscaConta = buscarNaCollection(conta.getNumero());
 
-		if (buscaConta.isPresent()){
-			listaContas.set( (listaContas.indexOf(buscaConta.get())), conta);
-				System.out.println("A conta numero: " + conta.getNumero() + " foi atualizada com sucesso.\n");
+		if (buscaConta.isPresent()) {
+			listaContas.set((listaContas.indexOf(buscaConta.get())), conta);
+			System.out.println("A conta numero: " + conta.getNumero() + " foi atualizada com sucesso.\n");
 		} else
-				System.err.println("A conta numero " + conta.getNumero() + " não foi encontrada.\n");
+			System.err.println("A conta numero " + conta.getNumero() + " não foi encontrada.\n");
 
 	}
 
@@ -71,15 +71,45 @@ public class ContaController implements ContaRepository {
 	@Override
 	public void sacar(int numero, float valor) {
 
+		Optional<Conta> conta = buscarNaCollection(numero);
+
+		if (conta.isPresent())
+			if (conta.get().sacar(valor) == true) {
+				System.out.println("O saque na conta: " + numero + " foi efetuado com sucesso.\n");
+				conta.get().getSaldo();
+			} else
+				System.err.println("A conta numero " + numero + " não foi encontrada.\n");
+
 	}
 
 	@Override
 	public void depositar(int numero, float valor) {
+		
+		Optional<Conta> conta = buscarNaCollection(numero);
 
-	}
+		if (conta.isPresent()) {
+				conta.get().depositar(valor);
+				System.out.println("O depósito na conta: " + numero + " foi efetuado com sucesso.\n");
+				conta.get().getSaldo();
+		} else 
+				System.err.println("A conta numero " + numero + " não foi encontrada.\n");
+		 
+	}	
 
 	@Override
 	public void transferir(int numeroOrigem, int numeroDestino, float valor) {
+		
+		Optional<Conta> contaOrigem = buscarNaCollection(numeroOrigem);
+		Optional<Conta> contaDestino = buscarNaCollection(numeroDestino);
+
+		if (contaOrigem.isPresent() && contaDestino.isPresent()) {
+			if (contaOrigem.get().sacar(valor) == true) {
+				contaDestino.get().depositar(valor);
+				System.out.println("A transferencia para a conta " + numeroDestino + " foi efetuada com sucesso.\n");
+			}
+			
+			} else
+				System.err.println("A conta numero " + numero + " não foi encontrada.\n");
 
 	}
 

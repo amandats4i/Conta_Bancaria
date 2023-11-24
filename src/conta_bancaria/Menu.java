@@ -13,13 +13,14 @@ import conta_bancaria.util.Cores;
 public class Menu {
 
 	static Scanner leia = new Scanner(System.in);
+	
 	public static String theme = Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_PURPLE_BOLD;
 	public static String theme2 = Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_GREEN_BOLD;
 
 	public static void main(String[] args) {
 
-		int opcao, numero, agencia, tipo, aniversario;
-		float saldo, limite;
+		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
+		float saldo, limite, valor;
 		String nome;
 
 		ContaController contas = new ContaController();
@@ -166,17 +167,49 @@ public class Menu {
 
 			case 6:
 				System.out.println(Cores.TEXT_WHITE + "Saque\n\n");
+				
+				System.out.println("Digite o numero da conta: ");
+				numero = leia.nextInt();
+				
 				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser sacado: ");
+				valor = leia.nextFloat();
+				
+				contas.sacar(numero, valor);
+				
 				keyPress();
 				break;
 
 			case 7:
 				System.out.println(Cores.TEXT_WHITE + "Depósito\n\n");
+				
+				System.out.println("Digite o numero da conta: ");
+				numero = leia.nextInt();
+				
+				System.out.println(Cores.TEXT_WHITE + "Digite o valor a ser depositado: ");
+				valor = leia.nextFloat();
+				
+				contas.depositar(numero, valor);
+				
 				keyPress();
 				break;
 
 			case 8:
-				System.out.println(Cores.TEXT_WHITE + "Transferência entre Contas\n\n");
+				System.out.println(Cores.TEXT_GREEN + "Transferência entre Contas\n\n");
+				
+				System.out.println("Digite o numero da conta de origem: ");
+				numero = leia.nextInt();
+				
+				System.out.println("Digite o numero da conta de destino: ");
+				numeroDestino = leia.nextInt();
+				
+				if (numero != numeroDestino) {
+					System.out.println("Digite o valor a ser transferido: ");
+					valor = leia.nextFloat();
+					contas.transferir(numero, numeroDestino, valor);
+					
+				} else
+					System.out.println("Os números das contas são iguais. Por favor, digite um número válido.");
+				
 				keyPress();
 				break;
 
