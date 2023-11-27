@@ -48,7 +48,8 @@ public class Menu {
 			System.out.println("            6 - Sacar                                ");
 			System.out.println("            7 - Depositar                            ");
 			System.out.println("            8 - Transferir valores entre Contas      ");
-			System.out.println("            9 - Sair                                 ");
+			System.out.println("            9 - Consulta por Titular                 ");
+			System.out.println("            10 - Sair                                ");
 			System.out.println("                                                     ");
 			System.out.println(theme2 + "*****************************************************");
 			System.out.println(theme + "Por favor, digite a opção desejada:                  ");
@@ -56,7 +57,7 @@ public class Menu {
 
 			opcao = leia.nextInt();
 
-			if (opcao == 9) {
+			if (opcao == 10) {
 				System.out.println(Cores.ANSI_WHITE_BACKGROUND + Cores.TEXT_PURPLE_BOLD + "\nAtendimento encerrado. \nBanco Manila S.A - For Everone.");
 				sobre();
 				leia.close();
@@ -214,7 +215,16 @@ public class Menu {
 				
 				keyPress();
 				break;
-
+			case 9:
+				System.out.println("Consultar contas por Titular");
+				System.out.println("Digite o nome completo do Titular: ");
+				leia.skip("\\R");
+				nome = leia.nextLine();
+						
+				contas.procurarPorNome(nome);
+				keyPress();
+				break;
+				
 			default:
 				System.err.println("\nOpção Inválida!\n" + Cores.TEXT_RESET);
 				keyPress();
